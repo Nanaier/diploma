@@ -1,0 +1,235 @@
+/* Modern Calendar Styles */
+.rbc-calendar {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #1a1a1a;
+  background-color: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05);
+}
+
+/* Header styling */
+.rbc-header {
+  padding: 16px 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #5f6368;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: none;
+  background-color: transparent;
+}
+
+/* Time slots in week/day view */
+.rbc-time-header {
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.rbc-time-view {
+  border-left: none;
+}
+
+.rbc-time-content {
+  border-top: 1px solid #f0f0f0;
+}
+
+/* Time gutter */
+.rbc-time-gutter {
+  font-size: 12px;
+  color: #70757a;
+  padding-right: 12px;
+}
+
+/* Cells */
+.rbc-day-bg + .rbc-day-bg,
+.rbc-header + .rbc-header {
+  border-left: 1px solid #f0f0f0;
+}
+
+.rbc-month-view {
+  border: none;
+}
+
+.rbc-month-row + .rbc-month-row {
+  border-top: 1px solid #f0f0f0;
+}
+
+.rbc-off-range-bg {
+  background-color: #fafafa;
+}
+
+.rbc-date-cell {
+  padding: 8px;
+  font-size: 13px;
+}
+
+/* Current time indicator */
+.rbc-current-time-indicator {
+  background-color: #4285f4;
+  height: 2px;
+  z-index: 2;
+}
+
+/* Event styling */
+.rbc-event {
+  padding: 4px 8px;
+  font-size: 12px;
+  font-weight: 500;
+  border-radius: 6px;
+  border: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.rbc-event-content {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Agenda view */
+.rbc-agenda-view table.rbc-agenda-table {
+  border: none;
+}
+
+.rbc-agenda-time-cell {
+  color: #70757a;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* Toolbar */
+.rbc-toolbar {
+  padding: 16px;
+  margin-bottom: 0;
+  background-color: transparent;
+  border-bottom: none;
+}
+
+.rbc-toolbar button {
+  color: #3c4043;
+  border: 1px solid #e0e0e0;
+  background: white;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+}
+
+.rbc-toolbar button:hover {
+  background-color: #f8f9fa;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.rbc-toolbar button:active {
+  transform: translateY(0);
+}
+
+.rbc-toolbar button.rbc-active {
+  background-color: #f0f7ff;
+  color: #1a73e8;
+  border-color: #d2e3fc;
+  box-shadow: none;
+}
+
+/* Today cell */
+.rbc-today {
+  background-color: #f0f7ff;
+  position: relative;
+}
+
+/* Time slot hover effect */
+.rbc-time-slot {
+  transition: background-color 0.2s ease;
+}
+
+.rbc-time-slot:hover {
+  background-color: #f8f9fa;
+}
+
+/* Custom scrollbar for agenda view */
+.rbc-agenda-content {
+  scrollbar-width: thin;
+  scrollbar-color: #e0e0e0 transparent;
+}
+
+.rbc-agenda-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.rbc-agenda-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.rbc-agenda-content::-webkit-scrollbar-thumb {
+  background-color: #e0e0e0;
+  border-radius: 3px;
+}
+
+/* Modern modal styling */
+.rbc-overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+}
+
+.rbc-overlay .rbc-overlay-header {
+  font-size: 18px;
+  font-weight: 600;
+  padding: 16px 24px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+/* Month view day numbers */
+.rbc-date-cell > a {
+  color: #1a1a1a;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.rbc-off-range > a {
+  color: #bdbdbd;
+}
+
+/* Add some spacing between events in month view */
+.rbc-month-row {
+  min-height: 100px;
+}
+
+.rbc-month-view .rbc-row-content {
+  min-height: 80px;
+}
+
+/* Selected slot style */
+.rbc-selected {
+  background-color: rgba(66, 133, 244, 0.1);
+  border: 1px dashed #4285f4;
+}
+
+/* Add some subtle animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.rbc-event {
+  animation: fadeIn 0.2s ease-out forwards;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .rbc-toolbar {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .rbc-toolbar-label {
+    margin: 8px 0;
+  }
+  
+  .rbc-header {
+    padding: 12px 4px;
+    font-size: 11px;
+  }
+}

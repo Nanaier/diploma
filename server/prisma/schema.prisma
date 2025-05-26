@@ -1,0 +1,256 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          Int      @id @default(autoincrement())
+  email       String   @unique
+  password    String
+  displayName String
+  role        Role
+  status      Status   @default(pending)
+  createdAt   DateTime @default(now())
+  searchTags  Json?    @default("{}")
+  description String   @default("")
+
+  Psychologist   Psychologist?
+  assignedPsychs PsychologistOnUser[] // users who are assigned
+  events         Event[]              @relation("UserEvents")
+  createdEvents  Event[]              @relation("CreatedEvents")
+  notifications  Notification[]
+  Booking        Booking[]
+  MoodEntry      MoodEntry[]
+  SessionComment SessionComment[]
+}
+
+model Psychologist {
+  id          Int     @id @default(autoincrement())
+  user        User    @relation(fields: [userId], references: [id])
+  userId      Int     @unique
+  certUrl     String
+  avatarUrl   String?
+  description String
+  specialty   String?
+  phoneNumber String?
+  approved    Boolean @default(false)
+  tags        Json?   @default("{}")
+
+  users PsychologistOnUser[]
+
+  Booking            Booking[]
+  WeeklyAvailability WeeklyAvailability[]
+  SessionComment     SessionComment[]
+}
+
+model PsychologistOnUser {
+  id             Int          @id @default(autoincrement())
+  psychologist   Psychologist @relation(fields: [psychologistId], references: [id])
+  psychologistId Int
+  dataStatus     DataStatus   @default(pending)
+  user           User         @relation(fields: [userId], references: [id])
+  userId         Int
+  assignedAt     DateTime     @default(now())
+
+  @@unique([psychologistId, userId]) // prevent duplicates
+}
+
+model Event {
+  id          Int       @id @default(autoincrement())
+  title       String
+  description String?
+  start       DateTime  @db.Timestamp(6)
+  end         DateTime  @db.Timestamp(6)
+  allDay      Boolean   @default(false)
+  color       String?
+  location    String?
+  type        EventType @default(CUSTOM)
+
+  userId Int
+  user   User @relation("UserEvents", fields: [userId], references: [id])
+
+  createdById          Int
+  createdBy            User           @relation("CreatedEvents", fields: [createdById], references: [id])
+  notifications        Notification[]
+  Booking              Booking[]
+  psychologistBookings Booking[]      @relation("PsychologistEvent")
+
+  exerciseId Int? // Nullable if not linked to an exercise
+  exercise   Exercise? @relation(fields: [exerciseId], references: [id])
+
+  SessionComment SessionComment[]
+}
+
+model Notification {
+  id        Int              @id @default(autoincrement())
+  message   String
+  isRead    Boolean          @default(false)
+  type      NotificationType
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+
+  // Relationships
+  userId Int
+  user   User @relation(fields: [userId], references: [id])
+
+  eventId Int?
+  event   Event? @relation(fields: [eventId], references: [id])
+
+  response ResponseStatus? // New field to track the response (accepted/denied)
+
+  booking   Booking? @relation(fields: [bookingId], references: [id])
+  bookingId Int?
+
+  // Indexes
+  @@index([userId])
+  @@index([eventId])
+}
+
+enum ResponseStatus {
+  ACCEPTED
+  DENIED
+  PENDING
+}
+
+model WeeklyAvailability {
+  id             Int      @id @default(autoincrement())
+  psychologistId Int
+  dayOfWeek      Int // 0 = Sunday, 6 = Saturday
+  startTime      String // "09:00" format
+  endTime        String // "12:00" format
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt()
+
+  psychologist Psychologist @relation(fields: [psychologistId], references: [id])
+
+  @@index([psychologistId])
+}
+
+model Exercise {
+  id          Int          @id @default(autoincrement())
+  name        String
+  description String
+  type        ExerciseType
+  tags        Json?        @default("{}")
+  steps       Json // масив кроків, структура залежить від типу
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt()
+  Event       Event[]
+}
+
+model SessionComment {
+  id             Int      @id @default(autoincrement())
+  eventId        Int
+  psychologistId Int
+  userId         Int
+  comment        String
+  exerciseTags   Json?    @default("{}") // Stores parsed exercise tags from comment
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt()
+
+  // Relationships
+  event        Event        @relation(fields: [eventId], references: [id])
+  psychologist Psychologist @relation(fields: [psychologistId], references: [id])
+  user         User         @relation(fields: [userId], references: [id])
+
+  @@index([eventId])
+  @@index([psychologistId])
+  @@index([userId])
+}
+
+model MoodEntry {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  mood      Int // 1 to 5
+  notes     String?
+  date      DateTime @default(now())
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+}
+
+enum ExerciseType {
+  BREATHING
+  PHYSICAL
+  MEDITATION
+  VISUALIZATION
+  GROUNDING
+  CUSTOM
+}
+
+model Booking {
+  id             Int           @id @default(autoincrement())
+  userId         Int
+  psychologistId Int
+  startTime      DateTime
+  endTime        DateTime
+  status         BookingStatus @default(PENDING)
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt()
+
+  // Relations
+  user         User         @relation(fields: [userId], references: [id])
+  psychologist Psychologist @relation(fields: [psychologistId], references: [id])
+
+  eventId Int?
+  event   Event? @relation(fields: [eventId], references: [id])
+
+  psychEventId Int?
+  psychEvent   Event? @relation("PsychologistEvent", fields: [psychEventId], references: [id])
+
+  Notification   Notification[]
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+}
+
+enum NotificationType {
+  EVENT_CREATED
+  EVENT_UPDATED
+  EVENT_REMINDER
+  EVENT_CANCELLED
+  MEETING_INVITE
+  MEETING_REMINDER
+  SYSTEM_MESSAGE
+  PSYCHOLOGIST_ASSIGNED
+  PSYCHOLOGIST_MESSAGE
+}
+
+enum EventType {
+  CUSTOM
+  MEETING
+  MEDITATION
+  EXERCISE
+  AVAILABLE
+}
+
+enum Role {
+  user
+  psychologist
+  admin
+}
+
+enum Status {
+  pending
+  approved
+  rejected
+  needs_profile
+}
+
+enum DataStatus {
+  pending
+  approved
+}

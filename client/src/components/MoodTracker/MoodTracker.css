@@ -1,0 +1,448 @@
+/* styles/moodTracker.css */
+.mood-tracker {
+  max-width: 800px;
+  margin: 0 auto;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.mood-tracker h2 {
+  color: #333;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.mood-input-form {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+}
+
+.mood-options {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.mood-option {
+  flex: 1;
+  margin: 0 5px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background: white;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 0.2s;
+}
+
+.mood-option:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.mood-option.selected {
+  border-color: #4a90e2;
+  background-color: #e7f1fd;
+}
+
+.emoji {
+  font-size: 24px;
+  margin-bottom: 5px;
+}
+
+.mood-notes {
+  margin-bottom: 20px;
+}
+
+.mood-notes label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+.mood-notes textarea {
+  width: 100%;
+  min-height: 80px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  resize: vertical;
+}
+
+.submit-button {
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.2s;
+}
+
+.submit-button:hover {
+  background-color: #3a7bc8;
+}
+
+.submit-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.mood-tracker-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.mood-history,
+.mood-stats {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.mood-history h3,
+.mood-stats h3 {
+  margin-top: 0;
+  color: #444;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+
+.mood-entry {
+  padding: 15px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.mood-entry:last-child {
+  border-bottom: none;
+}
+
+.mood-entry-date {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 5px;
+}
+
+.mood-entry-value {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.mood-entry-value .emoji {
+  margin-right: 10px;
+  font-size: 20px;
+}
+
+.mood-entry-notes {
+  font-size: 14px;
+  color: #555;
+  background: #f9f9f9;
+  padding: 8px;
+  border-radius: 4px;
+  margin-top: 8px;
+}
+
+.stats-summary {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px 0;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-label {
+  display: block;
+  font-size: 14px;
+  color: #666;
+}
+
+.stat-value {
+  display: block;
+  font-size: 24px;
+  font-weight: bold;
+  color: #4a90e2;
+}
+
+.mood-chart {
+  margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+  .mood-tracker-content {
+    grid-template-columns: 1fr;
+  }
+
+  .mood-options {
+    flex-direction: column;
+  }
+
+  .mood-option {
+    margin: 5px 0;
+  }
+}
+
+
+/* MoodTracker.css */
+.mood-tracker {
+  max-width: 800px;
+  margin: 0 auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.mood-tracker h2 {
+  color: #2c3e50;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.error-message {
+  color: #e74c3c;
+  background-color: #fadbd8;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.today-entry-notice {
+  background-color: #d4edda;
+  color: #155724;
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.history-container {
+  max-height: 400px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 15px;
+  margin-top: 20px;
+}
+
+.loading-message {
+  text-align: center;
+  padding: 20px;
+  color: #7f8c8d;
+}
+
+/* MoodHistory styles */
+.mood-history {
+  background-color: white;
+  border-radius: 8px;
+  padding: 15px;
+}
+
+.mood-history h3 {
+  color: #2c3e50;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.mood-history ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.mood-entry {
+  padding: 15px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.mood-entry:last-child {
+  border-bottom: none;
+}
+
+.mood-entry-date {
+  font-size: 0.9em;
+  color: #7f8c8d;
+  margin-bottom: 5px;
+}
+
+.mood-entry-date .time {
+  margin-left: 10px;
+  color: #95a5a6;
+}
+
+.mood-entry-value {
+  display: flex;
+  align-items: center;
+  margin: 5px 0;
+}
+
+.mood-entry-value .emoji {
+  font-size: 1.5em;
+  margin-right: 10px;
+}
+
+.mood-entry-value .value {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.mood-entry-notes {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  font-size: 0.9em;
+  color: #34495e;
+}
+
+.loading-more {
+  text-align: center;
+  padding: 10px;
+  color: #7f8c8d;
+}
+
+/* MoodInput styles */
+.mood-input-form {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.mood-options {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.mood-option {
+  flex: 1;
+  min-width: 80px;
+  margin: 5px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mood-option:hover {
+  background-color: #f8f9fa;
+}
+
+.mood-option.selected {
+  background-color: #e3f2fd;
+  border-color: #2196f3;
+}
+
+.mood-option .emoji {
+  font-size: 1.8em;
+  margin-bottom: 5px;
+}
+
+.mood-option .label {
+  font-size: 0.8em;
+  text-align: center;
+}
+
+.mood-notes {
+  margin-bottom: 20px;
+}
+
+.mood-notes label {
+  display: block;
+  margin-bottom: 8px;
+  color: #2c3e50;
+  font-weight: 500;
+}
+
+.mood-notes textarea {
+  width: 100%;
+  min-height: 100px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  resize: vertical;
+  font-family: inherit;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 12px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.submit-button:hover {
+  background-color: #2980b9;
+}
+
+.submit-button:disabled {
+  background-color: #95a5a6;
+  cursor: not-allowed;
+}
+
+/* MoodStats styles */
+.mood-stats {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.mood-stats h3 {
+  color: #2c3e50;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.stats-summary {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-label {
+  display: block;
+  font-size: 0.9em;
+  color: #7f8c8d;
+  margin-bottom: 5px;
+}
+
+.stat-value {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.mood-chart {
+  margin-top: 20px;
+}
+
+.mood-chart h4 {
+  color: #2c3e50;
+  margin-bottom: 15px;
+  text-align: center;
+}

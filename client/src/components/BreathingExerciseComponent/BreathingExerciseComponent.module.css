@@ -1,0 +1,165 @@
+/* Main container */
+.breathing-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  color: #333;
+}
+
+/* Typography */
+.exercise-title {
+  text-align: center;
+  color: #4a6fa5;
+  margin-bottom: 1.5rem;
+  font-weight: 300;
+  font-size: 2rem;
+}
+
+.exercise-description {
+  text-align: center;
+  color: #666;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+/* Steps */
+.step-container {
+  background: white;
+  border-radius: 15px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  opacity: 0.6;
+  transform: scale(1);
+}
+
+.step-container.active {
+  opacity: 1;
+  transform: scale(1.02);
+}
+
+.step-title {
+  color: #4a6fa5;
+  margin-top: 0;
+  display: flex;
+  align-items: center;
+}
+
+.step-number {
+  background: #4a6fa5;
+  color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+  font-size: 0.9rem;
+}
+
+.step-description {
+  color: #666;
+  line-height: 1.6;
+}
+
+/* Timer */
+.timer-circle {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: #eef2f7;
+  margin: 2rem auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.timer-circle.breathing {
+  animation: breathe var(--duration) infinite ease-in-out;
+}
+
+.timer-text {
+  font-size: 2rem;
+  color: #4a6fa5;
+  font-weight: 300;
+}
+
+@keyframes breathe {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Progress bars */
+.progress-bar {
+  height: 8px;
+  background: #e0e6ed;
+  border-radius: 4px;
+  margin: 2rem 0;
+  overflow: hidden;
+}
+
+.progress {
+  height: 100%;
+  background: linear-gradient(90deg, #4a6fa5, #6b8cce);
+  width: 0%;
+  transition: width 0.5s ease;
+}
+
+/* Buttons */
+.exercise-button {
+  background: linear-gradient(90deg, #4a6fa5, #6b8cce);
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 1rem;
+  display: block;
+  margin: 0 auto;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(74, 111, 165, 0.3);
+}
+
+.exercise-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 7px 20px rgba(74, 111, 165, 0.4);
+}
+
+.exercise-button:disabled {
+  background: #ccc;
+  transform: none;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+/* Completion message */
+.complete-message {
+  text-align: center;
+  padding: 2rem;
+  background: rgba(74, 111, 165, 0.1);
+  border-radius: 15px;
+  margin-top: 2rem;
+}
+
+.complete-title {
+  color: #4a6fa5;
+}
+
+.complete-text {
+  color: #666;
+  line-height: 1.6;
+}
