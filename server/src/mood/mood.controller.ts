@@ -12,7 +12,6 @@ import {
 import { MoodService } from './mood.service';
 import { CreateMoodEntryDto } from './dto/create-mood-entry.dto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard'; // assuming you're using JWT
-import { Request } from 'express';
 
 @Controller('mood')
 @UseGuards(JwtAuthGuard)

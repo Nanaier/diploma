@@ -40,12 +40,7 @@ export default function DashboardPage() {
             : Promise.resolve({ data: [] }),
         ]);
 
-        // console.log("Events Response:", eventsRes.data);
-        // console.log("Exercises Response:", exercisesRes.data);
-        // console.log("Users Response:", usersRes.data);
-
         const formattedEvents = eventsRes.data.map(formatEvent);
-        // console.log(formattedEvents);
 
         setEvents(formattedEvents);
         setAvailableExercises(exercisesRes.data);
@@ -91,7 +86,7 @@ export default function DashboardPage() {
         start: updatedEvent.start.toISOString(),
         end: updatedEvent.end.toISOString(),
       });
-      // Update local state to reflect changes
+
       setEvents((prev) =>
         prev.map((event) =>
           event.id === updatedEvent.id ? { ...event, ...updatedEvent } : event
@@ -112,8 +107,7 @@ export default function DashboardPage() {
         start: newEvent.start.toISOString(),
         end: newEvent.end.toISOString(),
       });
-      // Add new event to local state
-      // setEvents((prev) => [...prev, formatEvent(response.data)]);
+
       return response.data;
     } catch (error) {
       console.error("Failed to create event:", error);
@@ -124,7 +118,6 @@ export default function DashboardPage() {
 
   if (!initialized || !user) return <LoadingSpinner />;
   if (isDataLoading && !hasInitialLoad) return <LoadingSpinner />;
-  // if (events.length === 0) return <LoadingSpinner />;
 
   return (
     <RouteGuard auth redirect="/">

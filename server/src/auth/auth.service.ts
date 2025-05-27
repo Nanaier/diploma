@@ -8,7 +8,6 @@ import { PrismaService } from '../../prisma/prisma.service';
 import * as bcrypt from 'bcrypt';
 import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
-import { PsychologistRegisterDto } from './dto/psychologist-register.dto';
 import { NotificationsService } from 'src/notifications/notifications.service';
 
 @Injectable()

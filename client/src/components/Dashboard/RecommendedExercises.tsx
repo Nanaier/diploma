@@ -7,7 +7,7 @@ export default function RecommendedExercises({
 }) {
   const router = useRouter();
   const handleExercisesClick = () => {
-    router.push(`/exercises`);
+    router.push("/exercises");
   };
 
   const handleExerciseClick = (id: string) => {

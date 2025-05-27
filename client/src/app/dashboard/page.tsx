@@ -46,8 +46,8 @@ export default function DashboardPage() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const matchingPsychs = await apiClient.get(`/matching/psychologists`);
-      const matchingExercises = await apiClient.get(`/matching/exercises`);
+      const matchingPsychs = await apiClient.get("/matching/psychologists");
+      const matchingExercises = await apiClient.get("/matching/exercises");
       console.log(matchingPsychs);
       console.log(matchingExercises);
       setMatchingPsychs(matchingPsychs.data);

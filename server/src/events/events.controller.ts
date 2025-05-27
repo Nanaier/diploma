@@ -31,14 +31,17 @@ export class EventsController {
     return this.eventsService.findForUser(req.user, targetUserId);
   }
 
-  @Get("/upcoming")
-  async getUpcomingUserEvents(@Req() req, @Query('userId') userIdQuery?: string) {
+  @Get('/upcoming')
+  async getUpcomingUserEvents(
+    @Req() req,
+    @Query('userId') userIdQuery?: string,
+  ) {
     const targetUserId = userIdQuery ? parseInt(userIdQuery) : req.user.id;
     return this.eventsService.findUpcomingForUser(req.user, targetUserId);
   }
 
   @Patch(':id')
   async update(@Param('id') id: number, @Body() dto: any, @Req() req) {
-    return this.eventsService.update(+id, dto, +req.user.id);
+    return this.eventsService.update(Number(id), dto, Number(req.user.id));
   }
 }

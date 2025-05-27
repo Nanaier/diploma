@@ -1,16 +1,8 @@
 // src/exercises/exercises.controller.ts
-import {
-  Controller,
-  Get,
-  Query,
-  UseGuards,
-  ParseArrayPipe,
-  DefaultValuePipe,
-  Param,
-} from '@nestjs/common';
+import { Controller, Get, Query, UseGuards, Param } from '@nestjs/common';
 import { ExercisesService } from './exercises.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
-import { ApiTags, ApiQuery, ApiOkResponse } from '@nestjs/swagger';
+import { ApiTags, ApiQuery } from '@nestjs/swagger';
 
 @ApiTags('exercises')
 @Controller('exercises')

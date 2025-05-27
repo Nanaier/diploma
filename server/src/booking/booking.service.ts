@@ -1,8 +1,4 @@
-import {
-  Injectable,
-  NotFoundException,
-  ForbiddenException,
-} from '@nestjs/common';
+import { Injectable, ForbiddenException } from '@nestjs/common';
 import { PrismaService } from 'prisma/prisma.service';
 import * as dayjs from 'dayjs';
 import { NotificationType, ResponseStatus } from '@prisma/client';
@@ -45,7 +41,7 @@ export class BookingService {
 
     if (overlappingBooking) {
       throw new Error(
-        `This slot is already booked. Please choose a different time.`,
+        'This slot is already booked. Please choose a different time.',
       );
     }
     const booking = await this.prisma.booking.create({

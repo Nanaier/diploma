@@ -65,8 +65,8 @@ export class AvailabilityController {
     @Query('endTime') endTime: string,
   ) {
     const isOverlapping = await this.availabilityService.checkForOverlap(
-      +psychologistId,
-      +dayOfWeek,
+      Number(psychologistId),
+      Number(dayOfWeek),
       startTime,
       endTime,
     );

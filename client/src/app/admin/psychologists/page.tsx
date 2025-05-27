@@ -30,7 +30,7 @@ export default function AdminPsychologistsPage() {
   >({});
 
   const fetchPending = async () => {
-    const data = await apiClient.get(`/admin/psychologists/pending`);
+    const data = await apiClient.get("/admin/psychologists/pending");
     console.log(data.data);
     setPsychologists(data.data);
     setLoading(false);

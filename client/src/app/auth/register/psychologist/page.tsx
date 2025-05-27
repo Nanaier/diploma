@@ -84,7 +84,7 @@ export default function PsychologistRegisterPage() {
       await login(data.access_token);
 
       // Redirect to profile completion with the new user ID
-      router.push(`/psychologist/complete-profile`);
+      router.push("/psychologist/complete-profile");
     } catch (error) {
       console.error("Registration error:", error);
       setError(error);
@@ -187,7 +187,9 @@ export default function PsychologistRegisterPage() {
 
         <button
           type="submit"
-          disabled={isSubmitting || (passwordTouched && passwordError) as boolean}
+          disabled={
+            isSubmitting || ((passwordTouched && passwordError) as boolean)
+          }
           className="w-full bg-blue-600 text-white cursor-pointer p-3 rounded-lg hover:bg-blue-700 disabled:bg-blue-400 transition-colors shadow-md"
         >
           {isSubmitting ? t("Registering...") : t("Register as Psychologist")}

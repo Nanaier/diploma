@@ -4,12 +4,12 @@ import { MoodEntry } from "./moodTypes";
 
 export const moodService = {
   async createMoodEntry(entry: Omit<MoodEntry, "id">): Promise<MoodEntry> {
-    const res = await apiClient.post(`/mood`, entry);
+    const res = await apiClient.post("/mood", entry);
     return res.data;
   },
 
   async getMoodEntries(): Promise<MoodEntry[]> {
-    const res = await apiClient.get(`/mood`);
+    const res = await apiClient.get("/mood");
     return res.data;
   },
 

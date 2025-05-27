@@ -22,10 +22,7 @@ import { GetPsychologistsDto } from './dto/get-psychologists.dto';
 
 @Controller('psychologist')
 export class PsychologistController {
-  constructor(
-    private psychologistService: PsychologistService,
-    private prisma: PrismaService,
-  ) {}
+  constructor(private psychologistService: PsychologistService) {}
 
   @Post('complete-profile')
   @UseGuards(JwtAuthGuard)
@@ -66,8 +63,8 @@ export class PsychologistController {
     const { page = 1, limit = 10, search = '' } = query;
 
     return this.psychologistService.getApprovedPsychologistsPaginated(
-      +page,
-      +limit,
+      Number(page),
+      Number(limit),
       search,
     );
   }
@@ -76,7 +73,7 @@ export class PsychologistController {
   @UseGuards(JwtAuthGuard)
   async getUsersAssignedToPsychologist(@Req() req) {
     return this.psychologistService.getUsersAssignedToPsychologist(
-      +req.user.id,
+      Number(req.user.id),
     );
   }
 
@@ -90,13 +87,19 @@ export class PsychologistController {
   @UseGuards(JwtAuthGuard)
   @HttpCode(204)
   async unassignUser(@Req() req, @Param('userId') userId: string) {
-    return this.psychologistService.unassignUser(+req.user.id, +userId);
+    return this.psychologistService.unassignUser(
+      Number(req.user.id),
+      Number(userId),
+    );
   }
 
   @Delete('user/unassign/:psychId')
   @UseGuards(JwtAuthGuard)
   @HttpCode(204)
   async unassignPsych(@Req() req, @Param('psychId') psychId: string) {
-    return this.psychologistService.unassignPsych(+req.user.id, +psychId);
+    return this.psychologistService.unassignPsych(
+      Number(req.user.id),
+      Number(psychId),
+    );
   }
 }

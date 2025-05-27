@@ -1,11 +1,11 @@
 // src/auth/user-role.guard.ts
-import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
+import { ExecutionContext, Injectable } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { JwtAuthGuard } from './jwt-auth.guard';
 
 @Injectable()
 export class UserRoleGuard extends JwtAuthGuard {
-  constructor(private reflector: Reflector) {
+  constructor() {
     super();
   }
 

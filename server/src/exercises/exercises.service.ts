@@ -44,7 +44,7 @@ export class ExercisesService {
 
   async getExerciseById(id: string): Promise<Exercise | null> {
     return this.prisma.exercise.findUnique({
-      where: { id: +id },
+      where: { id: Number(id) },
     });
   }
 }

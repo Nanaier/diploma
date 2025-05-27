@@ -7,7 +7,6 @@ import {
   MessageBody,
 } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
-import { PrismaService } from '../../prisma/prisma.service';
 
 @WebSocketGateway({
   cors: {
@@ -19,9 +18,9 @@ export class NotificationsGateway implements OnGatewayInit {
   @WebSocketServer()
   server: Server;
 
-  constructor(private prisma: PrismaService) {}
+  constructor() {}
 
-  afterInit(server: Server) {
+  afterInit() {
     console.log('WebSocket Gateway initialized');
   }
 

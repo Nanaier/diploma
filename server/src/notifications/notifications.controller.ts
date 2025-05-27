@@ -39,7 +39,7 @@ export class NotificationsController {
     { response }: { response: ResponseStatus },
     @Req() req,
   ) {
-    return this.notificationService.handleMeetingResponse(+id, response);
+    return this.notificationService.handleMeetingResponse(Number(id), response);
   }
 
   @Post()
@@ -58,7 +58,7 @@ export class NotificationsController {
   @Patch(':id/read')
   @UseGuards(JwtAuthGuard)
   async markAsRead(@Param('id') id: string, @Req() req) {
-    return this.notificationService.markAsRead(+id, req.user.id);
+    return this.notificationService.markAsRead(Number(id), req.user.id);
   }
 
   @Patch('mark-all-read')

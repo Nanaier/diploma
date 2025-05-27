@@ -110,7 +110,7 @@ export class NotificationsService {
 
       if (overlappingBooking) {
         throw new Error(
-          `This slot is already booked. Please choose a different time.`,
+          'This slot is already booked. Please choose a different time.',
         );
       }
 
@@ -121,7 +121,7 @@ export class NotificationsService {
 
       const event = await this.prisma.event.create({
         data: {
-          title: `Сесія з вашим психологом`,
+          title: 'Сесія з вашим психологом',
           description: 'Затверджена сесія.',
           start: booking.startTime,
           end: booking.endTime,
@@ -183,7 +183,8 @@ export class NotificationsService {
       // 2. Notify the user that the booking was rejected
       await this.createNotification({
         userId: booking.userId,
-        message: `Ваше бронування було відхилено. Будь ласка виберіть інший час.`,
+        message:
+          'Ваше бронування було відхилено. Будь ласка виберіть інший час.',
         type: NotificationType.EVENT_UPDATED,
       });
     }

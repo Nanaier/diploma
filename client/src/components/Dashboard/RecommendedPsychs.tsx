@@ -1,10 +1,14 @@
 import { useRouter } from "next/navigation";
 
-export default function RecommendedPsychologists({ psychs }: { psychs: any[] }) {
+export default function RecommendedPsychologists({
+  psychs,
+}: {
+  psychs: any[];
+}) {
   const router = useRouter();
-  
+
   const handlePsychsClick = () => {
-    router.push(`/psychologists`);
+    router.push("/psychologists");
   };
 
   const handleBookPsychClick = (psychologist: any) => {
@@ -12,7 +16,7 @@ export default function RecommendedPsychologists({ psychs }: { psychs: any[] }) 
   };
 
   const handleFillProfileClick = () => {
-    router.push(`/me`);
+    router.push("/me");
   };
 
   return (
@@ -73,9 +77,9 @@ export default function RecommendedPsychologists({ psychs }: { psychs: any[] }) 
       ) : (
         <div className="text-center py-6">
           <p className="text-gray-600 mb-4">
-            Наразі ми не можемо запропонувати рекомендації. Будь ласка, заповніть
-            детальнішу інформацію у своєму профілі, щоб ми могли підібрати
-            найкращих спеціалістів для вас.
+            Наразі ми не можемо запропонувати рекомендації. Будь ласка,
+            заповніть детальнішу інформацію у своєму профілі, щоб ми могли
+            підібрати найкращих спеціалістів для вас.
           </p>
           <button
             onClick={handleFillProfileClick}

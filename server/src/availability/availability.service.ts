@@ -20,8 +20,8 @@ export class AvailabilityService {
   ) {
     // Check for overlapping availability
     const isOverlapping = await this.checkForOverlap(
-      +psychologistId,
-      +dayOfWeek,
+      Number(psychologistId),
+      Number(dayOfWeek),
       startTime,
       endTime,
     );

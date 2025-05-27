@@ -1,6 +1,5 @@
 import {
   Controller,
-  Post,
   Body,
   Param,
   UseGuards,
@@ -20,17 +19,17 @@ export class UserController {
   @Patch('description')
   @UseGuards(UserRoleGuard)
   async update(@Body() dto: any, @Req() req) {
-    return this.userService.updateDescription(+req.user.id, dto.description);
+    return this.userService.updateDescription(Number(req.user.id), dto.description);
   }
 
   @Patch('psychologist/:id/shareData')
   @UseGuards(UserRoleGuard)
   async shareData(@Param('id') id: string, @Req() req) {
-    return this.userService.shareData(+req.user.id, +id);
+    return this.userService.shareData(Number(req.user.id), Number(id));
   }
 
   @Get(':id')
   async getUserInfo(@Param('id') id: string, @Req() req) {
-    return this.userService.getUserInfo(+req.user.id, +id);
+    return this.userService.getUserInfo(Number(req.user.id), Number(id));
   }
 }
